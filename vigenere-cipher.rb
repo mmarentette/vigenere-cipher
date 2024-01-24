@@ -8,16 +8,12 @@ class VigenereCipher
     end
 
     def plain_text
-        result = []
-
-        cipher_text.split('').each_with_index do |l, i|
+        cipher_text.split('').each_with_index.map do |l, i|
             key_position = ALPHABET.index(key[i])
             cipher_position = ALPHABET.index(cipher_text[i])
             text_position = cipher_position - key_position
-            result.push(ALPHABET[text_position])
-        end
-
-        result.join('')
+            ALPHABET[text_position]
+        end.join('')
     end
 
     private
