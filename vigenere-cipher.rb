@@ -1,6 +1,6 @@
 class VigenereCipher
     ALPHABET = [*'A'..'Z']
-    attr_reader :keyword, :cipher_text
+    attr_reader :keyword, :cipher_text, :key
 
     def initialize(keyword, cipher_text)
         @keyword = keyword.upcase
@@ -18,16 +18,16 @@ class VigenereCipher
 
     private
     def key
-        len = keyword.length
+        keyword_length = keyword.length
         result = keyword.split('')
         i = 0
 
-        cipher_text.split('')[len..-1].each do
-            result.push(keyword[i % len])
+        (cipher_text.length - keyword_length).times do
+            result.push(keyword[i % keyword_length])
             i += 1
         end
 
-        result.join('')
+        @key = result.join('')
     end
 end
 
